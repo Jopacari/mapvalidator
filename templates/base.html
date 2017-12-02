@@ -1,0 +1,26 @@
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Map Validator{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">Map Validator</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% block content %}
+      {% endblock content%}
+    </div class="container">
+    
+	<div class="container">
+	  {% block errors %}
+      {% endblock errors%}
+	</div class="container">
+  </body>
+</html>

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    
+
+      <p>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="myfile">
+        <button type="submit">Upload</button>
+      </form>
+      </p>
+    
+{% endblock content%}
+
+{% block errors %}
+      
+  {% if uploaded_file %}
+      <ol class="breadcrumb my-4">
+        {% block breadcrumb %}
+        <p>File uploaded : {{ uploaded_file }}</p>
+        {% endblock %}
+      </ol>
+    
+  
+	  {% if errors %}
+	  <p>Errors found: {{errors}}</p>
+	  {% else %}
+		<p> No errors found. <p><h4>Nice job!</h4><p>
+	  {% endif %}
+  
+	  <p>Logs from processing the file:<p>
+	  {% if result_output %}
+		
+		{% for line in result_output %}
+		  {{ line }} <br>
+		{% endfor %}
+	  {% endif %}
+  {% endif %}
+{% endblock errors%}

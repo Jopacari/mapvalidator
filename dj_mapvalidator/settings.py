@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 #Config for file upload
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_content')
+STATIC_ROOT = os.path.join(BASE_DIR, '../static_content')
 
 # Application definition
 

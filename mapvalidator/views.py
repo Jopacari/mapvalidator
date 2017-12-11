@@ -59,24 +59,27 @@ def home(request):
                                 result_output.append(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - " +  log_line )
                                 logger.error(log_line)
                                 errors += 1
+                            else:
+                                if not urls.group(1) in lines:
+                                    lines.add(urls.group(1))
+                                else:
+                                    # we found a duplicate
+                                    log_line = "Line " + str(line_number) + ": Origin url is duplicated. " + urls.group(1).encode('utf8','replace').decode('utf-8')
+                                    result_output.append(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - " +  log_line )
+                                    logger.error(log_line)
+                                    errors += 1
                         if not validators.url(urls.group(3)):
                             log_line = "Line " + str(line_number) + ": Url " + urls.group(3).encode('utf8','replace').decode('utf-8') + " is invalid."
                             result_output.append(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - " +  log_line )
                             logger.error(log_line)
                             errors += 1
+                    
                     else:
                         log_line = "Line " + str(line_number) + ": Bad line line_format or invalid character. " + line.encode('utf8','replace').decode('utf-8')
                         result_output.append(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - " +  log_line )
                         logger.error(log_line)
                         errors += 1
-                    if not line in lines:
-                        lines.add(line)
-                    else:
-                        # we found a duplicate
-                        log_line = "Line " + str(line_number) + ": It is a duplicated line. " + line.encode('utf8','replace').decode('utf-8')
-                        result_output.append(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - " +  log_line )
-                        logger.error(log_line)
-                        errors += 1
+                    
                 log_line = "Finished processing file. Found " + str(errors) + " error(s)."
                 result_output.append(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - " +  log_line )
                 logger.info(log_line)

@@ -20,8 +20,8 @@ def home(request):
         errors = 0
         max_errors = 100
         result_output = []
-        line_format = re.compile("(http://(?:[\w\-_]+\.)*([\w\-_]+\.[\w\-_]+)(?:/.*|\?.*|))\ (https://www.farfetch.com.*);")
-        base_domain_format = re.compile("http://(?:[\w\-_]+\.)*([\w\-_]+\.[\w\-_]+)(?:/|\?|\ )")
+        line_format = re.compile("(https?://(?:[\w\-_]+\.)*([\w\-_]+\.[\w\-_]+)(?:/.*|\?.*|))\ (https://www.farfetch.com.*);")
+        base_domain_format = re.compile("https?://(?:[\w\-_]+\.)*([\w\-_]+\.[\w\-_]+)(?:/|\?|\ )")
         base_origin_domain = 'not_detected_yet'
         result_output.append(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - Started processing file.")
         lines = set()
